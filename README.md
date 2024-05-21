@@ -1,5 +1,5 @@
 # SpringCourse
-#Functional Requirements
+# Functional Requirements
 Survey Management
 
 Create new surveys with a title and description.
