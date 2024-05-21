@@ -68,3 +68,67 @@
 - **User Login**: The system should authenticate students and administrators based on their credentials, providing appropriate access levels.
 - **Administrator Actions**: The system should restrict survey creation, editing, and deletion to administrators.
 - **Student Actions**: The system should allow students only to view available surveys and submit responses.
+
+## REST API Endpoints
+
+### Authentication
+- **POST /api/register**: Register a new user.
+  - Request body: `{ "name": "string", "email": "string", "password": "string" }`
+  - Response: `{ "message": "User registered successfully" }`
+- **POST /api/login**: Authenticate a user and return a token.
+  - Request body: `{ "email": "string", "password": "string" }`
+  - Response: `{ "token": "jwt-token" }`
+
+### Survey Management
+- **GET /api/surveys**: Get a list of all surveys.
+  - Response: `[ { "survey_id": "int", "title": "string", "description": "string", "created_date": "date" }, ... ]`
+- **POST /api/surveys**: Create a new survey.
+  - Request body: `{ "title": "string", "description": "string" }`
+  - Response: `{ "message": "Survey created successfully", "survey_id": "int" }`
+- **PUT /api/surveys/{id}**: Edit an existing survey.
+  - Request body: `{ "title": "string", "description": "string" }`
+  - Response: `{ "message": "Survey updated successfully" }`
+- **DELETE /api/surveys/{id}**: Delete a survey.
+  - Response: `{ "message": "Survey deleted successfully" }`
+
+### Question Management
+- **POST /api/surveys/{survey_id}/questions**: Add a question to a survey.
+  - Request body: `{ "text": "string", "type": "string" }`
+  - Response: `{ "message": "Question added successfully", "question_id": "int" }`
+- **PUT /api/questions/{id}**: Edit a question.
+  - Request body: `{ "text": "string", "type": "string" }`
+  - Response: `{ "message": "Question updated successfully" }`
+- **DELETE /api/questions/{id}**: Delete a question.
+  - Response: `{ "message": "Question deleted successfully" }`
+
+### Option Management
+- **POST /api/questions/{question_id}/options**: Add an option to a multiple-choice question.
+  - Request body: `{ "text": "string" }`
+  - Response: `{ "message": "Option added successfully", "option_id": "int" }`
+- **PUT /api/options/{id}**: Edit an option.
+  - Request body: `{ "text": "string" }`
+  - Response: `{ "message": "Option updated successfully" }`
+- **DELETE /api/options/{id}**: Delete an option.
+  - Response: `{ "message": "Option deleted successfully" }`
+
+### Student Survey Participation
+- **GET /api/surveys/{id}**: Get details of a survey including questions.
+  - Response: `{ "survey_id": "int", "title": "string", "description": "string", "questions": [ { "question_id": "int", "text": "string", "type": "string", "options": [ { "option_id": "int", "text": "string" }, ... ] }, ... ] }`
+- **POST /api/surveys/{survey_id}/responses**: Submit responses to survey questions.
+  - Request body: `[ { "question_id": "int", "answer": "string" }, ... ]`
+  - Response: `{ "message": "Responses submitted successfully" }`
+
+### Response Collection and Analysis
+- **GET /api/surveys/{id}/results**: Get the results of a survey.
+  - Response: `{ "survey_id": "int", "title": "string", "description": "string", "responses": [ { "question_id": "int", "text": "string", "type": "string", "answers": [ { "student_id": "int", "answer": "string" }, ... ] }, ... ] }`
+- **GET /api/surveys/{id}/responses**: Get all responses for a survey.
+  - Response: `{ "survey_id": "int", "responses": [ { "student_id": "int", "question_id": "int", "answer": "string" }, ... ] }`
+
+### User Management
+- **GET /api/users/{id}**: Get user details.
+  - Response: `{ "user_id": "int", "name": "string", "email": "string", "role": "string" }`
+- **PUT /api/users/{id}**: Update user details.
+  - Request body: `{ "name": "string", "email": "string", "password": "string" }`
+  - Response: `{ "message": "User updated successfully" }`
+- **DELETE /api/users/{id}**: Delete a user.
+  - Response: `{ "message": "User deleted successfully" }`
