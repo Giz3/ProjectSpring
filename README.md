@@ -33,11 +33,27 @@
 ### Academic Program Management
 
 - **POST /api/faculties**: Create a new faculty.
+  - Request: `{ "facultyName": "Engineering", "facultyCode": "ENG" }`
+  - Response: `{ "success": true, "message": "Faculty created", "faculty": { "id": 1, "facultyName": "Engineering", "facultyCode": "ENG" } }`
+
 - **POST /api/courses**: Add a new course.
+  - Request: `{ "courseName": "Intro to CS", "courseCode": "CS101", "description": "Introductory course", "facultyId": 1 }`
+  - Response: `{ "success": true, "message": "Course created", "course": { "id": 1, "courseName": "Intro to CS", "courseCode": "CS101", "description": "Introductory course", "facultyId": 1 } }`
+
 - **POST /api/students**: Add a new student.
+  - Request: `{ "firstName": "John", "lastName": "Doe", "dateOfBirth": "1995-08-25", "gender": "Male", "email": "john.doe@example.com", "phone": "123-456-7890", "address": "123 Main St", "courseId": 1 }`
+  - Response: `{ "success": true, "message": "Student created", "student": { "id": 1, "firstName": "John", "lastName": "Doe", "dateOfBirth": "1995-08-25", "gender": "Male", "email": "john.doe@example.com", "phone": "123-456-7890", "address": "123 Main St", "courseId": 1 } }`
 
 ### Conducting Surveys
 
 - **POST /api/surveys**: Create a new survey.
+  - Request: `{ "title": "Satisfaction Survey", "description": "Feedback collection", "dateConducted": "2024-05-31" }`
+  - Response: `{ "success": true, "message": "Survey created", "survey": { "id": 1, "title": "Satisfaction Survey", "description": "Feedback collection", "dateConducted": "2024-05-31" } }`
+
 - **POST /api/questions**: Add a new question to a survey.
+  - Request: `{ "surveyId": 1, "questionText": "How satisfied are you?", "questionType": "Multiple Choice", "options": ["Very satisfied", "Satisfied", "Neutral"] }`
+  - Response: `{ "success": true, "message": "Question added", "question": { "id": 1, "surveyId": 1, "questionText": "How satisfied are you?", "questionType": "Multiple Choice", "options": ["Very satisfied", "Satisfied", "Neutral"] } }`
+
 - **POST /api/answers**: Collect answers to survey questions.
+  - Request: `{ "questionId": 1, "studentId": 1, "answerText": "Very satisfied" }`
+  - Response: `{ "success": true, "message": "Answer submitted", "answer": { "id": 1, "questionId": 1, "studentId": 1, "answerText": "Very satisfied" } }`
