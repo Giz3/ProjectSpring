@@ -1,7 +1,7 @@
 # SpringCourse
 # Functional Requirements
 
-# Survey Management
+#1 Survey Management
 Create new surveys with a title and description.
 Edit existing surveys.
 Delete surveys.
